@@ -18,7 +18,7 @@ def fetch(params: dict) -> Response:
 
 def get_flights_from_filter(
     filter: TFSData,
-    currency: str = "",
+    currency: str = "BRL",
     *,
     mode: Literal["common", "fallback", "force-fallback", "local"] = "common",
 ) -> Result:
@@ -26,9 +26,9 @@ def get_flights_from_filter(
 
     params = {
         "tfs": data.decode("utf-8"),
-        "hl": "en",
+        "hl": "pt-BR",
         "tfu": "EgQIABABIgA",
-        "curr": currency,
+        "curr": "BRL",
     }
 
     if mode in {"common", "fallback"}:
