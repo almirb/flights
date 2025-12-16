@@ -6,11 +6,13 @@ async def fetch_with_playwright(url: str) -> str:
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page()
-        await page.goto(url)
+        # More timeout (120000ms)
+        await page.goto(url, timeout=120000)
         if page.url.startswith("https://consent.google.com"):
             await page.click('text="Accept all"')
         locator = page.locator('.eQ35Ce')
-        await locator.wait_for()
+        # More timeout for wait_for also
+        await locator.wait_for(timeout=120000)
         body = await page.evaluate(
             "() => document.querySelector('[role=\"main\"]').innerHTML"
         )
